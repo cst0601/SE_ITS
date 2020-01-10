@@ -2,7 +2,7 @@ import os
 from flask import Flask, render_template, request, make_response, url_for, send_from_directory, send_file
 from werkzeug.utils import secure_filename
 from src.session import generateHashFileName, generateSession
-from src.response import failure, success
+from src.response import failure, success, redirect
 from flask import redirect as flask_redirect
 from src.its_model.user_manager import UserManager
 from src.its_model.login_verification import LoginVerification
