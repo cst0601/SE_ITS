@@ -2,6 +2,5 @@ project/flask_env
 
 project/node_modules
 
-
 # ignore DS_Store
 ./.DS_Store
