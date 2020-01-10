@@ -1,0 +1,25 @@
+.button-right{
+  margin-left : auto;
+  float:right;
+}
+
+.label-title{
+  font-size: 30px;
+  line-height: 24px;
+  font-weight: bold;
+}
+.label-filename{
+  font-size: 20px;
+  font-weight: bold;
+}
+.form-control[readonly] {
+    background-color: white;
+}
+.project-text {
+  min-height: 200px;
+  resize: auto;
+  resize:none;
+}
+/* .aaa{
+  background: black;
+} */

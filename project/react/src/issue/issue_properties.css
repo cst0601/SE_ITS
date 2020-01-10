@@ -1,0 +1,15 @@
+.level{
+  margin: 0px 2px;
+}
+.attribute{
+  margin: 0px 4px;
+}
+.dropdown-item.active, .dropdown-item:active {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d
+}
+
+.list-group-item.NameList {
+  padding: 0 1.25rem;
+}
