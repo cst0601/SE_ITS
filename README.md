@@ -1,13 +1,17 @@
 # Issue Tracking System
 ITS(Issue Tracking System) is a web based system for users to create projects and submit issues.
 
+## Build frontend pages
+1. Move current working directory to `project/react`
+2. Run `npm install` to install required packages.
+3. Run `npm run build` to build.
+
 ## To run backend
 1. Download and install MongoDB.
 2. Move current work directory to `backend`
 3. Do `pip install -r requirements.txt` to install required packages.
-3. Set DB URI by issuing command `python src/its_model/mongo.py`.
-4. <>
-5. run `python app.py` to start.
+4. Set DB URI by issuing command `python src/its_model/mongo.py`.
+5. Run `flask run` to start.
 
 ## Line Message Gun
 Handles message sent by users via line. \
