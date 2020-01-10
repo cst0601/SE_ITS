@@ -1,14 +1,14 @@
 from flask import Blueprint, request
-from mongo import mongo, getProjectId, isOwner
-from login_required import login_required, project_member_required, project_owner_required, account_owner_required, project_manager_required
+from .its_model.mongo import mongo
+from .its_model.login_verification import LoginVerification
 from .its_model.user import ItsUser
 from .its_model.project import Project
 from .response import redirect, success, failure
 
 project_bp = Blueprint('project', __name__, url_prefix='/project')
 @project_bp.route('/get_project', methods=["POST"])
-@login_required
-@project_member_required
+@LoginVerification.login_required
+@LoginVerification.project_member_required
 def getProjectInfo():
     try:
         project = Project(request.get_json()["username"], request.get_json()["project_name"])
@@ -19,8 +19,8 @@ def getProjectInfo():
     return success(result)
 
 @project_bp.route('/update_description', methods=["POST"])
-@login_required
-@project_member_required
+@LoginVerification.login_required
+@LoginVerification.project_member_required
 def updateProjectInfo():
     try:
         project = Project(request.get_json()["username"], request.get_json()["project_name"])
@@ -30,14 +30,14 @@ def updateProjectInfo():
     return success("Update description succeed.")
 
 @project_bp.route('/list', methods=["POST"])
-@login_required
-@account_owner_required
+@LoginVerification.login_required
+@LoginVerification.account_owner_required
 def getProjectList():
     user = ItsUser(request.cookies.get("id"))
     return success(user.getProjectList())
 
 @project_bp.route('/list/create_project', methods=["POST"])
-@login_required
+@LoginVerification.login_required
 def createProject():
     username = request.cookies.get('id')
     projectName = request.get_json()["project_name"]
@@ -49,8 +49,8 @@ def createProject():
     return redirect(username + "/" + projectName)
 
 @project_bp.route('/delete_project', methods=["POST"])
-@login_required
-@project_owner_required
+@LoginVerification.login_required
+@LoginVerification.project_owner_required
 def deleteProject():
     user = ItsUser(request.cookies.get('id'))
     try:
@@ -60,8 +60,8 @@ def deleteProject():
     return success("Delete success.")
 
 @project_bp.route('/member_list', methods=["POST"])
-@login_required
-@project_member_required
+@LoginVerification.login_required
+@LoginVerification.project_member_required
 def getMemberList():
     try:
         project = Project(request.get_json()["username"], request.get_json()["project_name"])
@@ -73,8 +73,8 @@ def getMemberList():
     return success(results)
 
 @project_bp.route('/remove_member', methods=["POST"])
-@login_required
-@project_manager_required
+@LoginVerification.login_required
+@LoginVerification.project_manager_required
 def removeMember():
     try:
         project = Project(request.get_json()["username"], request.get_json()["project_name"])
@@ -87,8 +87,8 @@ def removeMember():
     return success({"members": project.getMemberList()})
 
 @project_bp.route('/update_member_role', methods=["POST"])
-@login_required
-@project_manager_required
+@LoginVerification.login_required
+@LoginVerification.project_manager_required
 def updateMemberRole():
     try:
         project = Project(request.get_json()["username"], request.get_json()["project_name"])
@@ -101,8 +101,8 @@ def updateMemberRole():
     return success({"members": project.getMemberList()})
 
 @project_bp.route('/add_new_member', methods=["POST"])
-@login_required
-@project_manager_required
+@LoginVerification.login_required
+@LoginVerification.project_manager_required
 def addNewMember():
     try:
         project = Project(request.get_json()["username"], request.get_json()["project_name"])

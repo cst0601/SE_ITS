@@ -1,7 +1,9 @@
-from pymongo import MongoClient
 import datetime
-client = MongoClient("mongodb://127.0.0.1:27017")
-its = client.its
+from pymongo import MongoClient
+from pymongo.uri_parser import parse_uri
+from .mongo import MONGO_URI
+client = MongoClient(MONGO_URI)
+its = client[parse_uri(MONGO_URI)['database']]
 class Issue:
     def __init__(self, projectId, issueNumber):
         issueNumber = int(issueNumber)
@@ -10,6 +12,7 @@ class Issue:
         if issue == None:
             raise Exception("Issue not exist.")
         self.issueId = issue["_id"]
+        self.issueNumber = issueNumber
 
     def getData(self):
         issue = its.issue.find_one({"_id": self.issueId}, {
@@ -44,7 +47,7 @@ class Issue:
         })
 
     def changeAttribute(self, changer, changeDetailDict):
-        if list(changeDetailDict.keys())[0] not in ["severity", "priority", "reproducible"]:
+        if list(changeDetailDict.keys())[0] not in ["severity", "priority", "reproducible", "state"]:
             raise Exception("Key error.")
         myquery = {"_id": self.issueId}
         newValues = {"$set": changeDetailDict}

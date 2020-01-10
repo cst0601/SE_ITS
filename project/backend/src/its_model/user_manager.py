@@ -1,6 +1,8 @@
 from pymongo import MongoClient
-client = MongoClient("mongodb://127.0.0.1:27017")
-its = client.its
+from pymongo.uri_parser import parse_uri
+from .mongo import MONGO_URI
+client = MongoClient(MONGO_URI)
+its = client[parse_uri(MONGO_URI)['database']]
 class UserManager:
     def createUser(self, userData):
         result = its.user_profile.find_one({"username": userData["username"]})
@@ -11,6 +13,8 @@ class UserManager:
         for key in documentKey:
             if key in userData.keys():
                 document[key] = userData[key]
+            else:
+                document[key] = ""
         document["role"] = "user"
         its.user_profile.insert_one(document)
 

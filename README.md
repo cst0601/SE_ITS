@@ -18,5 +18,5 @@ LMG is currently running on heroku, [portal to machine](https://line-issue-broad
 * This subsystem requires SSL enabled connection, SSL connection is not enabled, LMG will not respond to any message sent to it.
 * Setting up secret token and webhook:
     * Folder that saves token and webhook needs to be named as `line_broadcaster/secret_mix`.
-    * Files names as `token` and `webhook` needs to be added in the `secret_mix` folder, and record secret messages in it.
+    * Files names as `token` and `webhook` needs to be added in the `ecret_mix` folder, and record secret messages in it.
 * Build a virtualenv and run `pip install -r requirements.txt`

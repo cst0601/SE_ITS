@@ -1,7 +1,9 @@
-from pymongo import MongoClient
 from .project import Project
-client = MongoClient("mongodb://127.0.0.1:27017")
-its = client.its
+from pymongo import MongoClient
+from pymongo.uri_parser import parse_uri
+from .mongo import MONGO_URI
+client = MongoClient(MONGO_URI)
+its = client[parse_uri(MONGO_URI)['database']]
 class ItsUser:
     def __init__(self, username):
         self.username = username
@@ -45,7 +47,7 @@ class ItsUser:
 
     def getProjectList(self):
         """ will return
-                [{username: <projectId>,
+                [{username: <projectOwnerName>,
                  project_name: <projectName>}, ...]"""
         projects = list(its.project_member.aggregate([
         {
@@ -133,5 +135,5 @@ class ItsUser:
         except:
             raise Exception("Project not exist.")
         project.deleteIssue()
-        its.project_member.delete_many({"project_id": project_id})
-        its.project.delete_one({"_id": project_id})
+        its.project_member.delete_many({"project_id": project.projectId})
+        its.project.delete_one({"_id": project.projectId})

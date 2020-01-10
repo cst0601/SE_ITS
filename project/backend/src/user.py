@@ -1,19 +1,19 @@
 from flask import Blueprint, send_from_directory, request
-from login_required import login_required, its_manager_required
+from .its_model.login_verification import LoginVerification
 from .its_model.user import ItsUser
 from .its_model.user_manager import UserManager
 from .response import redirect, success, failure
 user_bp = Blueprint('user', __name__, url_prefix='/user')
 
 @user_bp.route('/profile', methods=["POST"])
-@login_required
+@LoginVerification.login_required
 def getUserProfile():
     user = ItsUser(request.cookies.get('id'))
     profile = user.getProfile(request.get_json()["username"])
     return success(profile)
 
 @user_bp.route('/update_profile', methods=["POST"])
-@login_required
+@LoginVerification.login_required
 def updateUserProfile():
     if request.cookies.get("id") != request.get_json()["username"]:
         return failure("Not acount owner")
@@ -23,7 +23,7 @@ def updateUserProfile():
     return success(profile)
 
 @user_bp.route('/update_password', methods=["POST"])
-@login_required
+@LoginVerification.login_required
 def updateUserPassword():
     if request.cookies.get("id") != request.get_json()["username"]:
         return failure("Not acount owner")
@@ -35,21 +35,21 @@ def updateUserPassword():
     return success("Update password succeed")
 
 @user_bp.route('/check', methods=["POST"])
-@login_required
+@LoginVerification.login_required
 def check():
     return success(request.cookies.get('id'))
 
 @user_bp.route('/list', methods=["POST"])
-@login_required
-@its_manager_required
+@LoginVerification.login_required
+@LoginVerification.system_manager_required
 def getUserList():
     userManager = UserManager()
     return {"info": "success",
             "payload": userManager.getUsers()}
 
 @user_bp.route('/update_role', methods=["POST"])
-@login_required
-@its_manager_required
+@LoginVerification.login_required
+@LoginVerification.system_manager_required
 def updateRole():
     userManager = UserManager()
     try:
@@ -59,8 +59,8 @@ def updateRole():
     return success(userManager.getUsers())
 
 @user_bp.route('/create_account', methods=["POST"])
-@login_required
-@its_manager_required
+@LoginVerification.login_required
+@LoginVerification.system_manager_required
 def createAccount():
     userManager = UserManager()
     payload = request.get_json()

@@ -4,7 +4,7 @@ Create and validate login session.
 """
 import hashlib
 import datetime
-from mongo import mongo
+from .its_model.mongo import mongo
 
 # Generates a login session
 # - Saves a session entity to DB ["_id", "hashCode"]

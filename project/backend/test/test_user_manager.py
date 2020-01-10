@@ -19,7 +19,6 @@ class TestUserManager(unittest.TestCase):
         "username": "pythonut3",
         "name": "Python Unit Test2",
         "email": "pythonut@gmail.com",
-        "lineID": "unittestlineid2",
         "role": "user",
         "password": "pythonut2"
         })
