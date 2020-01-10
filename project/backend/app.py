@@ -94,7 +94,7 @@ def create_app(test_config=None):
         if id and session:
             result = mongo.db.session.find_one({"id": id, "session": session})
             if not result is None:
-                return redirect('/' + id)
+                return flask_redirect('/' + id)
         return getPage("")
 
 
