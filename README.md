@@ -13,8 +13,13 @@ ITS(Issue Tracking System) is a web based system for users to create projects an
 4. Setting up secret mix:
   * Create a folder named `secret_mix` in `project/backend`
   * Create two files in the folder, `token` and `mail_passwd` that contains line token and email password seperately.
-5. Set DB URI by issuing command `python src/its_model/mongo.py`.
-6. Run `flask run` to start.
+5. Set mongo URI by modifying the MONGO_URI variable in `src/its_model/mongo.py`
+6. Create root account by issuing command `python src/its_model/mongo.py`.
+7. Run `flask run` to start.
+
+## To access system manager page
+Sign in as system manager (default:root)
+Go to <your url here>/accountmanager
 
 ## Line Message Gun
 Handles message sent by users via line. \
