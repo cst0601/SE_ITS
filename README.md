@@ -3,9 +3,11 @@ ITS(Issue Tracking System) is a web based system for users to create projects an
 
 ## To run backend
 1. Download and install MongoDB.
-2. Set DB URI at `backend/src/its_model/mongo.py`.
-3. <>
-4. run `python app.py` to start.
+2. Move current work directory to `backend`
+3. Do `pip install -r requirements.txt` to install required packages.
+3. Set DB URI by issuing command `python src/its_model/mongo.py`.
+4. <>
+5. run `python app.py` to start.
 
 ## Line Message Gun
 Handles message sent by users via line. \
