@@ -1,8 +1,9 @@
 import os
-from flask import Flask, render_template, request, make_response, redirect, url_for, send_from_directory, send_file
+from flask import Flask, render_template, request, make_response, url_for, send_from_directory, send_file
 from werkzeug.utils import secure_filename
 from src.session import generateHashFileName, generateSession
-from src.response import failure, success, redirect
+from src.response import failure, success
+from flask import redirect as flask_redirect
 from src.its_model.user_manager import UserManager
 from src.its_model.login_verification import LoginVerification
 from src.its_model.mongo import mongo, MONGO_URI
@@ -36,7 +37,6 @@ def create_app(test_config=None):
         os.makedirs(app.instance_path)
     except OSError:
         pass
-        print(secure_filename("asdjiasdjoi"))
 
     @app.route('/file', methods=["POST"])
     @LoginVerification.login_required
@@ -101,7 +101,7 @@ def create_app(test_config=None):
     # a simple page that says hello
     @app.route('/', defaults={'path': ''}, methods=["GET"])
     def root(path):
-        return redirect('/sign_in')
+        return flask_redirect('/sign_in')
 
     @app.route('/<path:path>', methods=["GET"])
     def getPage(path):

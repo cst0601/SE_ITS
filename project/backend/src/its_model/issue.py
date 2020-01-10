@@ -28,7 +28,6 @@ class Issue:
                                         "_id": 0
                                     })
         issue["comment_list"] = list(comments) + list(issue_historys)
-
         return issue
 
     def changeAssignee(self, changer, changeDetailDict):
