@@ -16,6 +16,7 @@ ITS(Issue Tracking System) is a web based system for users to create projects an
 5. Set mongo URI by modifying the MONGO_URI variable in `src/its_model/mongo.py`
 6. Create root account by issuing command `python src/its_model/mongo.py`.
 7. Run `flask run` to start.
+8. The default url of the website is 127.0.0.1:5000 (or as shown on console).
 
 ## To access system manager page
 Sign in as system manager (default:root)
