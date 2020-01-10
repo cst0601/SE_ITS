@@ -4,6 +4,7 @@ project/flask_env
 project/backend/its_env
 project/backend/templates/*
 project/backend/static
+project/backend/secret_mix
 
 project/node_modules
 

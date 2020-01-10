@@ -10,8 +10,11 @@ ITS(Issue Tracking System) is a web based system for users to create projects an
 1. Download and install MongoDB.
 2. Move current work directory to `backend`
 3. Do `pip install -r requirements.txt` to install required packages.
-4. Set DB URI by issuing command `python src/its_model/mongo.py`.
-5. Run `flask run` to start.
+4. Setting up secret mix:
+  * Create a folder named `secret_mix` in `project/backend`
+  * Create two files in the folder, `token` and `mail_passwd` that contains line token and email password seperately.
+5. Set DB URI by issuing command `python src/its_model/mongo.py`.
+6. Run `flask run` to start.
 
 ## Line Message Gun
 Handles message sent by users via line. \
