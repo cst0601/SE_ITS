@@ -35,3 +35,17 @@ LMG is currently running on heroku, [portal to machine](https://line-issue-broad
     * Folder that saves token and webhook needs to be named as `line_broadcaster/secret_mix`.
     * Files names as `token` and `webhook` needs to be added in the `ecret_mix` folder, and record secret messages in it.
 * Build a virtualenv and run `pip install -r requirements.txt`
+
+## Run Acceptance Test
+1. Move current work directory to `at/src` 
+2. Run `pip install --upgrade robotframework` 
+3. Run `pip install --upgrade robotframework-seleniumlibrary` 
+4. Run `pip install --upgrade robotframework-selenium2library` 
+5. Download webDriver base on your browser https://selenium.dev/downloads/
+6. Move webDriver file to your python folder or add environment variable `Path` 
+7. Run `robot <scriptFile.robot>` to run selected script.
+
+### Running backend unit test
+1. Move current working directory to `backend`
+2. Run `coverage run -m unittest discover` to run unit test
+3. Run `coverage result -m` to get the code coverage.
